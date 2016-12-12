@@ -1,5 +1,5 @@
 
-angular.module("cars", ["video-background", "ngAnimate", "ngResource", "ui.router"])
+angular.module("cars", ["ngAnimate", "ngResource", "ui.router"])
   .controller("indexController", ["$state", "Car", "Photo", indexControllerFunction])
   .controller("showController", ["$state", "$stateParams", "Car", "Photo", showControllerFunction])
   .config(["$stateProvider", Router])
@@ -21,27 +21,13 @@ function indexControllerFunction($state, Car, Photo) {
 function showControllerFunction($state, $stateParams, Car, Photo) {
   this.car = Car.get({id: $stateParams.id})
     this.photos = this.car.photos
-    // this.photos = this.car.photos.map((photoFromCar) => {
-    //   let photo = new Photo()
-    //   photo.someProp = photoFromCar.someProp
-    //   photo.someProp = photoFromCar.someProp
-    //   photo.someProp = photoFromCar.someProp
-    //   return photo
-    // })
     this.newPhoto = new Photo({car_id: $stateParams.id});
     this.create = function(){
     this.newPhoto.$save().then(function(photo){
       $state.go("show", {id: photo.car_id}, {reload: true})
     })
   }
-  //   this.update = function(photo){
-  //     this.photo = Photo.get({id: photo.id})
-  //     this.photo.$promise.then(() => {
-  //     this.photo.$update({id: photo.id}).then(function(photo){
-  //     $state.go("show", { id: photo.car_id})
-  //   })
-  //   })
-  // }
+
     this.update = function(photo){
       photo.showEdit = !photo.showEdit
       let photoToEdit = Photo.get({id: photo.id})
@@ -76,15 +62,14 @@ function showControllerFunction($state, $stateParams, Car, Photo) {
     }
 }
 
-
 function photoFactory($resource){
-  return $resource("http://localhost:3000/photos/:id", {}, {
+  return $resource("https://lit-inlet-66458.herokuapp.com/photos/:id", {}, {
       update: { method: "PUT"}
   })
 }
 
 function Callback($resource){
-  return $resource("http://localhost:3000/cars/:id", {}, {
+  return $resource("https://lit-inlet-66458.herokuapp.com/cars/:id", {}, {
       update: { method: "PUT"}
   })
 }
