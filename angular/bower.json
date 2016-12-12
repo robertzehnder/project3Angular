@@ -1,0 +1,21 @@
+{
+  "name": "angular",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "Robert Zehnder <robzcodes@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/robertzehnder/project3",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-vidbg": "angular-video-background#^0.0.12",
+    "angular-animate": "^1.5.9"
+  }
+}

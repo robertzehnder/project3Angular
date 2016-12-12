@@ -1,0 +1,91 @@
+<div data-ng-controller="showController as vm">
+<div id="showCarousel" class="carousel slide" data-ride="carousel">
+  <!-- <ol class="carousel-indicators">
+    <li data-target="#showCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#showCarousel" data-slide-to="1"></li>
+    <li data-target="#showCarousel" data-slide-to="2"></li>
+  </ol> -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item" ng-class="{active:!$index}" ng-repeat="photo in vm.car.photos">
+      <img src="{{photo.photoUrl}}" alt="{{photo.year}}" class="img-responsive"/>
+        <div class="carousel-caption">
+          <h3 data-ng-hide="photo.showEdit">{{photo.year}}</h3>
+          <!-- <button id="singlebutton" ng-click="vm.editPhoto(photo)" name="button">Edit Entry</button> -->
+          <button type="button" data-ng-hide="photo.showEdit" data-ng-click="vm.toggleEdit(photo)">Edit Entry</button>
+          <form data-ng-show="photo.showEdit">
+            <button id="singlebutton" class="btn btn-primary" ng-click="vm.destroy(photo)">Delete Entry</button><br>
+            <input class="blacktext" type="text" ng-model="photo.photoUrl" /><br>
+            <input class="blacktext" type="text" ng-model="photo.color"  /><br>
+            <input class="blacktext" type="number" ng-model="photo.year" /><br>
+            <button ng-click="vm.update(photo)">confirm</button>
+            <button ng-click="vm.toggleEdit(photo)">cancel</button>
+
+            <!-- <button ng-click="vm.destroy(photo)">delete</button> -->
+          </form>
+        </div>
+    </div>
+  <a class="left carousel-control" href="#showCarousel" role="button" data-slide="prev">
+    <span class="icon-prev" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#showCarousel" role="button" data-slide="next">
+    <span class="icon-next" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+  </div>
+  </div>
+</div>
+
+<br>
+ <form class="form-horizontal" ng-submit="vm.create()">
+ <fieldset>
+
+ <!-- Form Name -->
+ <legend><span class="submitTitle">Submit a Photo</span></legend>
+
+ <!-- Text input-->
+ <div class="form-group">
+   <label class="col-md-4 control-label" for="textinput">Color:</label>
+   <div class="col-md-4">
+   <input id="textinput" name="textinput" type="text" ng-model="vm.newPhoto.color" placeholder="Color" class="form-control input-md">
+
+   </div>
+ </div>
+
+ <!-- Text input-->
+ <div class="form-group">
+   <label class="col-md-4 control-label" for="numberinput">Year:</label>
+   <div class="col-md-4">
+     <input id="numberinput" name="numberinput" type="text" ng-model="vm.newPhoto.year" placeholder="Year" class="form-control input-md">
+
+   </div>
+ </div>
+
+ <!-- Text input-->
+ <!-- <div class="form-group">
+   <label class="col-md-4 control-label" for="textinput">Enter Car ID:</label>
+   <div class="col-md-4">
+   <input id="textinput" name="textinput" type="text" ng-model="vm.newPhoto.car_id" placeholder="{{vm.car.id}}" class="form-control input-md">
+
+   </div>
+ </div> -->
+
+ <!-- Textarea -->
+ <div class="form-group">
+   <label class="col-md-4 control-label" for="textarea">Link a PhotoUrl:</label>
+   <div class="col-md-4">
+     <textarea class="form-control" id="textarea" ng-model="vm.newPhoto.photoUrl" name="textarea">photoUrl </textarea>
+   </div>
+ </div>
+
+ <!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="singlebutton"></label>
+  <div class="col-md-4">
+    <button id="singlebutton" class="confirmButton" name="singlebutton" data-ng-click="vm.save()" class="btn btn-primary">Confirm</button>
+  </div>
+  <!-- <button id="singlebutton"  ng-click="vm.destroyCar()" class="btn btn-primary">Delete Car</button> -->
+</div>
+
+</fieldset>
+</form>
